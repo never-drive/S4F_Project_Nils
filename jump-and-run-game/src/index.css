@@ -34,6 +34,16 @@ body {
   min-height: 100vh;
 }
 
+#maponediv {
+  margin-top: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  height: 100vh;
+}
+
 .yellowbtn {
   position: relative;
   background-color: var(--btnyellow);
@@ -93,6 +103,7 @@ body {
   flex-direction: column;
   height: 150px;
   border:rgba(0, 0, 0, 0.3) solid 1px;
+  overflow: hidden;
 }
 
 .title {
@@ -129,11 +140,20 @@ body {
 
 #Spielfigur {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  left: 30;
   width: 50px;
-  height: 50px;
+  height: 80px;
   background-color: red;
   transition: all 0.1s;
   z-index: 1;
 }
+
+#ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  background-color: green;
+  z-index: 0;
+}
+
