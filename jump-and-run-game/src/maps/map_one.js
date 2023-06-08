@@ -10,10 +10,10 @@ const MapOne = () => {
   let figur;
   let blocks;
 
-  function fall() {
+  function fall(delay) {
     setTimeout(() => {
-    
-    }, 1000);
+      setBottomPosition(prevBottomPosition => prevBottomPosition - 150);
+    }, delay);
   };
 
   const hitbox = () => {
@@ -55,6 +55,9 @@ const MapOne = () => {
 
     // Figur hochsetzen
     setBottomPosition(prevBottomPosition => prevBottomPosition + 150);
+    
+    // Figur runtersetzen nach einer kurzen Wartezeit
+    fall(100);
   };
 
   function enterFullScreen() {
