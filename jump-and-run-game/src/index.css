@@ -9,6 +9,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  overflow: hidden;
   
 }
 
@@ -140,7 +141,7 @@ body {
 
 #Spielfigur {
   position: absolute;
-  left: 30;
+  left: 30vw;
   width: 50px;
   height: 80px;
   background-color: red;
@@ -151,9 +152,29 @@ body {
 #ground {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 0vw;
   height: 50px;
   background-color: green;
+  z-index: 0;
+}
+
+#block1 {
+  position: absolute;
+  bottom: 50px;
+  width: 50px;
+  height: 50px;
+  left: 60vw;
+  background-color: black;
+  z-index: 0;
+}
+
+#block2 {
+  position: absolute;
+  bottom: 50px;
+  width: 50px;
+  height: 150px;
+  left: 70vw;
+  background-color: black;
   z-index: 0;
 }
 
