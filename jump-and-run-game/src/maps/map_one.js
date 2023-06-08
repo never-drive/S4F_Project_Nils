@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-
-
-
-
 const MapOne = () => {
   const [bottomPositions, setBottomPosition] = useState(50);
- 
   
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -20,7 +15,6 @@ const MapOne = () => {
         enterFullScreen();
         startgame();
       }
-    
     };
 
     document.addEventListener('keydown', handleKeyDown);
@@ -29,8 +23,6 @@ const MapOne = () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, );
-
-  
 
   const jump = () => {
     // Figur hochsetzen
@@ -77,11 +69,6 @@ const MapOne = () => {
     if (hitbox()) {
       setBottomPosition((prevBottomPosition) => prevBottomPosition + 150);
     } 
-    
-    
-    
-
-    
   };
 
   function enterFullScreen() {
@@ -101,14 +88,10 @@ const MapOne = () => {
     const blocks = document.querySelectorAll('.block');
   
     blocks.forEach((block) => {
-     
       let currentPosition = parseFloat(block.offsetLeft);
-      
-  
       const animateBlock = () => {
         currentPosition -= 1; 
         block.style.left = `${currentPosition}px`;
-       
   
         if (currentPosition > -block.offsetWidth) {
           requestAnimationFrame(animateBlock);
@@ -118,7 +101,6 @@ const MapOne = () => {
       animateBlock();
     });
   };
-  
   
   return (
     <div id="maponediv">
