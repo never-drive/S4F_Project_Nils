@@ -1,48 +1,38 @@
 import React, { useState, useEffect } from 'react';
 
-const MapOne = () => {
+function MapOne() {
 
-  let blockPositions;
-  let bottomPositions;
+  let bottomPosition;
   let setBottomPosition;
-  let rightPositions;
-  let leftPositions;
-  let figur;
-  let blocks;
 
-  function fall(delay) {
-    setTimeout(() => {
-      setBottomPosition(prevBottomPosition => prevBottomPosition - 150);
-    }, delay);
-  };
+  const hitBlock = () => {
+    // Position der Figur berechnen
+    let figur = document.querySelector('#Spielfigur');
+    let leftPos = figur.offsetLeft;
+    let rightPos = leftPos + figur.offsetWidth;
 
-  const hitbox = () => {
-    // calculate  positions
-    figur = document.querySelector('#Spielfigur');
-    leftPositions = figur.offsetLeft;
-    rightPositions = leftPositions + figur.offsetWidth;
-
+    // Position der Blöcke berechnen
     let screenheight = window.screen.height;
+    let blockPositions = calculateBlockPositions();
 
-    return calculateBlockPositions().some((position) => 
-    screenheight-position.top === bottomPositions && 
-      position.left <= rightPositions && 
-      position.right >= leftPositions);
+    // true, falls Figur im Bereich eines anderen Blocks ist
+    return blockPositions.some((position) => 
+      screenheight-position.top === bottomPosition && 
+      position.left <= rightPos && 
+      position.right >= leftPos);
   };
 
   const calculateBlockPositions = () => {
-    blockPositions = [];
-    blocks = document.querySelectorAll('.block');
+    let blockPositions = [];
+    let blocks = document.querySelectorAll('.block');
     blocks.forEach((block) => {
-      let topPosition = block.offsetTop;
-      let bottomPosition = topPosition + block.offsetHeight;
-      let leftPosition = block.offsetLeft;
-      let rightPosition = leftPosition + block.offsetWidth;
+      let top = block.offsetTop;
+      let left = block.offsetLeft;
       const positionObj = {
-        top: topPosition,
-        bottom: bottomPosition,
-        left: leftPosition,
-        right: rightPosition,
+        top: top,
+        bottom:  top + block.offsetHeight,
+        left: left,
+        right: left + block.offsetWidth,
       };
 
       blockPositions.push(positionObj);
@@ -51,13 +41,15 @@ const MapOne = () => {
   };
 
   const jump = () => {
-    if (!hitbox()) return;
+    if (!hitBlock()) return;
 
     // Figur hochsetzen
-    setBottomPosition(prevBottomPosition => prevBottomPosition + 150);
+    setBottomPosition(pos => pos + 150);
     
     // Figur runtersetzen nach einer kurzen Wartezeit
-    fall(100);
+    setTimeout(() => {
+      setBottomPosition(pos => pos - 150);
+    }, 100);
   };
 
   function enterFullScreen() {
@@ -72,8 +64,8 @@ const MapOne = () => {
       element.msRequestFullscreen();
   }
 
-  const startgame = () => {
-    const blocks = document.querySelectorAll('.block');
+  const animateBlocks = () => {
+    let blocks = document.querySelectorAll('.block');
 
     blocks.forEach((block) => {
       let currentPosition = parseFloat(block.offsetLeft);
@@ -101,12 +93,12 @@ const MapOne = () => {
       case 'Enter':
       default:
         enterFullScreen();
-        startgame();
+        animateBlocks();
         break;
     }
   };
 
-  [bottomPositions, setBottomPosition] = useState(50);
+  [bottomPosition, setBottomPosition] = useState(50);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
@@ -117,7 +109,7 @@ const MapOne = () => {
 
   return (
     <div id="maponediv">
-      <div id="Spielfigur" style={{ bottom: `${bottomPositions}px` }}></div>
+      <div id="Spielfigur" style={{ bottom: `${bottomPosition}px` }}></div>
       <div id="ground" className="block" style={{ width: '2000px' }}></div>
       <div id="block1" className="block"></div>
       <div id="block2" className="block"></div>
