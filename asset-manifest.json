@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/S4F_Project_Nils/static/css/main.f05c8330.css",
+    "main.js": "/S4F_Project_Nils/static/js/main.26a223f5.js",
+    "index.html": "/S4F_Project_Nils/index.html",
+    "main.f05c8330.css.map": "/S4F_Project_Nils/static/css/main.f05c8330.css.map",
+    "main.26a223f5.js.map": "/S4F_Project_Nils/static/js/main.26a223f5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f05c8330.css",
+    "static/js/main.26a223f5.js"
+  ]
+}
